@@ -18,9 +18,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the repository
 COPY . .
 
-# Expose the default Streamlit port
-EXPOSE 8501
+# Expose the port (Render sets this dynamically)
+ENV PORT=10000
+EXPOSE $PORT
 
 # Command to run the Streamlit app
-# We bind to 0.0.0.0 so Render can route traffic to it
-CMD ["streamlit", "run", "Combined_App/app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+# We use shell format so that $PORT is evaluated
+CMD streamlit run Combined_App/app.py --server.port $PORT --server.address 0.0.0.0
