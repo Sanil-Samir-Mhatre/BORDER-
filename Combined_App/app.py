@@ -8,6 +8,7 @@ import cv2
 import easyocr
 import re
 import time
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 from PIL import Image, ImageChops, ImageEnhance
 import torch
 import torch.nn as nn
@@ -361,16 +362,16 @@ elif page == "EDA & Insights":
             st.success("EDA completed!")
             
     st.subheader("Dataset Class Distribution")
-    if os.path.exists("app/static/EDA_Class_Distribution.png"):
-        st.image("app/static/EDA_Class_Distribution.png", use_container_width=True)
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "EDA_Class_Distribution.png")):
+        st.image(os.path.join(BASE_DIR, "app", "static", "EDA_Class_Distribution.png"), use_container_width=True)
     
     st.subheader("Feature Engineering & Extraction")
-    if os.path.exists("app/static/FeatureEngineering_Visuals.png"):
-        st.image("app/static/FeatureEngineering_Visuals.png", use_container_width=True)
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "FeatureEngineering_Visuals.png")):
+        st.image(os.path.join(BASE_DIR, "app", "static", "FeatureEngineering_Visuals.png"), use_container_width=True)
         
     st.subheader("Preprocessing Enhancements")
-    if os.path.exists("app/static/Preprocessing_Before_After.png"):
-        st.image("app/static/Preprocessing_Before_After.png", use_container_width=True)
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "Preprocessing_Before_After.png")):
+        st.image(os.path.join(BASE_DIR, "app", "static", "Preprocessing_Before_After.png"), use_container_width=True)
 
 elif page == "Model Evaluation":
     st.header("Model Evaluation & Baseline Comparison")
@@ -382,8 +383,8 @@ elif page == "Model Evaluation":
             run_training_pipeline()
             st.success("Training completed!")
             
-    if os.path.exists("app/static/model_comparison.csv"):
-        df = pd.read_csv("app/static/model_comparison.csv")
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "model_comparison.csv")):
+        df = pd.read_csv(os.path.join(BASE_DIR, "app", "static", "model_comparison.csv"))
         df = df[df['Accuracy'] < 1.0]
         df.loc[df['Accuracy'] > 0, 'Accuracy'] = 0.90
         df.loc[df['Accuracy'] > 0, 'Precision'] = 0.88
@@ -405,14 +406,14 @@ elif page == "Model Evaluation":
         
     st.markdown("### Confusion Matrices")
     col1, col2 = st.columns(2)
-    if os.path.exists("app/static/CM_Mark1_RandomForest.png"):
-        col1.image("app/static/CM_Mark1_RandomForest.png", caption="Mark 1: Random Forest", use_container_width=True)
-    if os.path.exists("app/static/CM_Mark2_ResNet50.png"):
-        col2.image("app/static/CM_Mark2_ResNet50.png", caption="Mark 2: ResNet50", use_container_width=True)
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "CM_Mark1_RandomForest.png")):
+        col1.image(os.path.join(BASE_DIR, "app", "static", "CM_Mark1_RandomForest.png"), caption="Mark 1: Random Forest", use_container_width=True)
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "CM_Mark2_ResNet50.png")):
+        col2.image(os.path.join(BASE_DIR, "app", "static", "CM_Mark2_ResNet50.png"), caption="Mark 2: ResNet50", use_container_width=True)
         
     st.markdown("### Deep Learning Training History")
-    if os.path.exists("app/static/training_history.png"):
-        st.image("app/static/training_history.png", caption="Mark 2: ResNet50 Training History", use_container_width=True)
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "training_history.png")):
+        st.image(os.path.join(BASE_DIR, "app", "static", "training_history.png"), caption="Mark 2: ResNet50 Training History", use_container_width=True)
 
 elif page == "Identity Graph":
     st.header("Identity Graph & Threat Intelligence")
@@ -492,13 +493,13 @@ elif page == "Identity Graph":
 elif page == "About":
     st.header("About This Project")
     
-    if os.path.exists("app/static/User_Journey.png"):
-        st.image("app/static/User_Journey.png", use_container_width=True)
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "User_Journey.png")):
+        st.image(os.path.join(BASE_DIR, "app", "static", "User_Journey.png"), use_container_width=True)
         
     st.markdown("---")
     st.subheader("System Architecture")
-    if os.path.exists("app/static/Architecture_Flow.png"):
-        st.image("app/static/Architecture_Flow.png", use_container_width=True)
+    if os.path.exists(os.path.join(BASE_DIR, "app", "static", "Architecture_Flow.png")):
+        st.image(os.path.join(BASE_DIR, "app", "static", "Architecture_Flow.png"), use_container_width=True)
         
     st.markdown("---")
     
@@ -527,7 +528,7 @@ elif page == "Application on real passport":
     st.header("Application on Real Passport")
     st.write("Review the real-world application and forensics of the system.")
     
-    pdf_path = "app/static/real_passport_app.pdf"
+    pdf_path = os.path.join(BASE_DIR, "app", "static", "real_passport_app.pdf")
     if os.path.exists(pdf_path):
         with open(pdf_path, "rb") as f:
             base64_pdf = base64.b64encode(f.read()).decode('utf-8')
@@ -535,3 +536,4 @@ elif page == "Application on real passport":
         st.markdown(pdf_display, unsafe_allow_html=True)
     else:
         st.error("PDF report not found.")
+

@@ -8,6 +8,10 @@ import numpy as np
 def perform_eda(data_dir="../data/raw", output_dir="../app/static"):
     os.makedirs(output_dir, exist_ok=True)
     
+    if not os.path.exists(data_dir):
+        print(f"Data directory {data_dir} not found. EDA cannot proceed.")
+        return
+        
     # Example structure parsing: assuming data_dir has subfolders for classes
     data = []
     classes = [d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))]
