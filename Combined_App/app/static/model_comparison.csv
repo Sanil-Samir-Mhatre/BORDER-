@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,F1,ROC-AUC
+Random Forest,0.95,0.9166666666666666,0.99,0.9519230769230769,0.9866999999999999
+EfficientNet,1.0,1.0,1.0,1.0,1.0
+Evidence Fusion,1.0,1.0,1.0,1.0,1.0

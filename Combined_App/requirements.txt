@@ -1,0 +1,14 @@
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+opencv-python
+kagglehub
+pillow
+networkx
+xgboost
+easyocr
+torch
+torchvision
